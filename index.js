@@ -1,10 +1,10 @@
-/* Configuration variables can be changed */
+/* Configuration variables can be changed
 const animateSlides = true;
 const autoPlay = true;
 const sliderTimeout = 3000;
 const stopOnClick = false;
 
-/* Init variables do not touch unless u know what u are doing */
+/* Init variables do not touch unless u know what u are doing 
 const slider = document.getElementById("mySlider");
 const slides = slider.getElementsByClassName("mySlides");
 const sliderNav = document.getElementById("mySliderNav");
@@ -14,10 +14,10 @@ let slideIndex = 0;
 let slideDisplayEnded = false;
 let rewindSlides = false;
 
-/* If autoPlay then playSlider() else showSlide(firstIndex) */
+/* If autoPlay then playSlider() else showSlide(firstIndex) 
 autoPlay ? playSlider() : showSlide(slideIndex);
 
-
+*/
 class Slider {
     constructor(animateSlides, autoplay, sliderTimeout, stopOnClick, sliderMaxWidth, arrayImg) {
         this.animateSlides = animateSlides;
@@ -30,49 +30,45 @@ class Slider {
     };
     drawSlider() {
         let slider = document.createElement("div");
-        let slides;
         slider.classList.add("3-content", "w3-display-container");
         slider.style.maxWidth = "960px";
         slider.style.margin = "auto";
-        body.appendChild(slider);
+        document.body.appendChild(slider);
 
         for (let i = 0; i < this.arrayImg.length; i++) {
-            let temp = document.createElement("div");
-            temp.classList.add("w3-display-container");
+            let slide = document.createElement("div");
+            slide.classList.add("w3-display-container");
             let img = document.createElement("img");
             img.setAttribute("src", this.arrayImg[i]);
             img.style.width = "100%";
-            temp.appendChild(img);
-            slides.push(temp);
+            slide.appendChild(img);
+            slider.appendChild(slide);
         }
-        slider.appendChild(slides);
+        
 
         let leftBtn = document.createElement("button");
         leftBtn.classList.add("w3-button", "w3-black", "w3-hover-white", "w3-display-left");
-        leftBtn.innerText = "&#10094;";
+        leftBtn.innerHTML = "&#10094;";
         leftBtn.addEventListener("click", () => { this.nextSlide(-1)});
         slider.appendChild(leftBtn);
 
         let rightBtn = document.createElement("button");
         rightBtn.classList.add("w3-button", "w3-black", "w3-hover-white", "w3-display-right");
-        rightBtn.innerText = "&#10095;";
+        rightBtn.innerHTML = "&#10095;";
         rightBtn.addEventListener("click", () => { this.nextSlide(1)});
         slider.appendChild(rightBtn);
 
         let sliderNav = document.createElement("div");
-        let navBtn;
         sliderNav.classList.add("w3-center");
-        body.appendChild(sliderNav);
+        document.body.appendChild(sliderNav);
 
         for (let i = 0; i < this.arrayImg.length; i++) {
-            let temp = document.createElement("span");
-            temp.classList.add("w3-badge", "myDots", "w3-border", "w3-border-black", "w3-transparent");
-            temp.addEventListener("click", () => { this.slideIndex = i});
-            navBtn.push(temp);
+            let navBtn = document.createElement("span");
+            navBtn.classList.add("w3-badge", "myDots", "w3-border", "w3-border-black", "w3-transparent");
+            navBtn.addEventListener("click", () => { this.slideIndex = i});
+            sliderNav.appendChild(navBtn);
         }
-
-        sliderNav.appendChild(navBtn);
-    }
+    };
 
     nextSlide(n) {
         rewindSlides = n < 0 ? true : false;
